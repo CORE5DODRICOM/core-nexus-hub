@@ -1,0 +1,17 @@
+{
+  "source": "https://github.com/CORE4DODRI/core-nexus-hub",
+  "capabilities": [
+    {"capability":"application code and routes","source":"GitHub repository","outcome":"migrate","status":"in_progress","next_action":"copy application and verify routes"},
+    {"capability":"database schema and seeded modules","source":"supabase/migrations","outcome":"migrate to Lovable Cloud","status":"in_progress","next_action":"apply schema and seed"},
+    {"capability":"existing records","source":"database export absent","outcome":"migrate to Lovable Cloud","status":"pending","next_action":"request per-table CSV or JSON exports"},
+    {"capability":"existing auth identities","source":"user export absent","outcome":"migrate to Lovable Cloud","status":"pending","next_action":"request user IDs and emails; verify first-login linkage"},
+    {"capability":"authorization","source":"role and permission policies","outcome":"migrate","status":"in_progress","next_action":"verify role policies"},
+    {"capability":"uploaded file bytes","source":"none detected","outcome":"none","status":"verified","next_action":"none"},
+    {"capability":"external providers","source":"none detected","outcome":"none","status":"verified","next_action":"none"},
+    {"capability":"public endpoints and callbacks","source":"none detected","outcome":"none","status":"verified","next_action":"none"},
+    {"capability":"webhooks and schedules","source":"none detected","outcome":"none","status":"verified","next_action":"none"},
+    {"capability":"secrets","source":"environment configuration","outcome":"replace with Lovable Cloud bindings","status":"in_progress","next_action":"verify runtime"},
+    {"capability":"cutover","source":"GitHub source","outcome":"preview","status":"pending","next_action":"verify app and existing users before publication"},
+    {"capability":"verification","source":"app and Cloud","outcome":"verify","status":"pending","next_action":"test pages, data and auth"}
+  ]
+}
