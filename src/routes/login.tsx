@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DodriLogo } from "@/components/brand/DodriLogo";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth, isMasterAdmin } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/login")({
   ssr: false,
@@ -65,7 +65,10 @@ function LoginPage() {
       const { error: err } = await supabase.auth.signInWithPassword({ email, password });
       if (err) throw err;
       await supabase.rpc("bootstrap_current_user", {});
-      const { data: access } = await supabase.rpc("check_access" as never);
+      // Master admin skips the company/subscription gate entirely.
+      const access = isMasterAdmin(email)
+        ? { allowed: true }
+        : (await supabase.rpc("check_access" as never)).data;
       const a = access as { allowed?: boolean; reason?: string; end_date?: string } | null;
       if (!a?.allowed) {
         window.sessionStorage.setItem("dodri.denied", JSON.stringify({ reason: a?.reason ?? "unknown", end_date: a?.end_date }));
