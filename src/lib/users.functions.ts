@@ -2,6 +2,12 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 
+const FULL_ACCESS_EMAILS = ["admin@dodricom.ma", "admin@dodricom.com"];
+function isFullAccessEmail(claims: unknown): boolean {
+  const email = String((claims as { email?: string } | undefined)?.email ?? "").toLowerCase();
+  return FULL_ACCESS_EMAILS.includes(email);
+}
+
 const createSchema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -19,10 +25,11 @@ export const createUser = createServerFn({ method: "POST" })
     const { supabase, userId } = context;
 
     // Caller must have users.create permission
-    const { data: allowed } = await supabase.rpc("has_permission", {
+    const { data: permitted } = await supabase.rpc("has_permission", {
       _user_id: userId,
       _code: "users.create",
     });
+    const allowed = permitted || isFullAccessEmail(context.claims);
     if (!allowed) throw new Error("You do not have permission to create users.");
 
     const { data: callerProfile } = await supabase
@@ -112,10 +119,11 @@ export const editUser = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const { supabase, userId } = context;
 
-    const { data: allowed } = await supabase.rpc("has_permission", {
+    const { data: permitted } = await supabase.rpc("has_permission", {
       _user_id: userId,
       _code: "users.edit",
     });
+    const allowed = permitted || isFullAccessEmail(context.claims);
     if (!allowed) throw new Error("You do not have permission to edit users.");
 
     const { data: callerProfile } = await supabase
