@@ -1,12 +1,15 @@
 import { createFileRoute, Outlet, redirect } from "@tanstack/react-router";
 import { supabase } from "@/integrations/supabase/client";
 import { AppShell } from "@/components/layout/AppShell";
+import { isMasterAdmin } from "@/hooks/useAuth";
 
 export const Route = createFileRoute("/_authenticated")({
   ssr: false,
   beforeLoad: async ({ location }) => {
     const { data, error } = await supabase.auth.getUser();
     if (error || !data.user) throw redirect({ to: "/login" });
+    // Master admin: full access, no company/subscription required.
+    if (isMasterAdmin(data.user.email)) return { user: data.user };
     // Company + subscription gate (super admin is always allowed).
     await supabase.rpc("bootstrap_current_user", {});
     const { data: access } = await supabase.rpc("check_access" as never);

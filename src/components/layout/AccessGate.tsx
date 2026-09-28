@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Building2, LockKeyhole, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuth, isMasterAdmin } from "@/hooks/useAuth";
 import { useCompany, useSubscription, daysLeft } from "@/hooks/useCompany";
 
 /**
@@ -13,7 +13,9 @@ export function AccessGate({ children }: { children: ReactNode }) {
   const company = useCompany();
   const subscription = useSubscription(company.data?.id);
 
-  const bypass = (roleName ?? "").toLowerCase().includes("super admin");
+  const bypass =
+    isMasterAdmin(user?.email) ||
+    (roleName ?? "").toLowerCase().includes("super admin");
 
   if (bypass) return <>{children}</>;
 

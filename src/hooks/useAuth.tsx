@@ -27,6 +27,13 @@ type AuthState = {
 
 const AuthContext = createContext<AuthState | null>(null);
 
+/** Master account: full access to everything, no company/subscription required. */
+export const MASTER_ADMIN_EMAIL = "admin@dodricom.ma";
+
+export function isMasterAdmin(email?: string | null) {
+  return (email ?? "").toLowerCase() === MASTER_ADMIN_EMAIL;
+}
+
 async function loadAccess(userId: string) {
   const [{ data: profile }, { data: userRoles }] = await Promise.all([
     supabase
@@ -124,8 +131,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       profile,
       roleName,
       permissions,
-      can: (code: string) => permissions.includes(code),
-      isSuper: (roleName ?? "").toLowerCase().includes("super admin"),
+      can: (code: string) =>
+        isMasterAdmin(session?.user.email) || permissions.includes(code),
+      isSuper:
+        isMasterAdmin(session?.user.email) ||
+        (roleName ?? "").toLowerCase().includes("super admin"),
       refresh: async () => {
         await hydrate(session?.user.id);
       },
