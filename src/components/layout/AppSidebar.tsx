@@ -36,9 +36,6 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const openModule = useRouterState({
-    select: (s) => (s.location.search as { module?: string })?.module,
-  });
   const { data: modules } = useModules();
   const activeModules = (modules ?? []).filter((m) => m.enabled);
 
@@ -55,14 +52,16 @@ export function AppSidebar() {
         <SidebarGroup className="py-2">
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/dashboard")} tooltip="Dashboard">
-                  <Link to="/dashboard">
-                    <Gauge />
-                    <span>Dashboard</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {isSuper && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={isActive("/dashboard")} tooltip="Dashboard">
+                    <Link to="/dashboard">
+                      <Gauge />
+                      <span>Dashboard</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
@@ -128,10 +127,10 @@ export function AppSidebar() {
                   <SidebarMenuItem key={module.id}>
                     <SidebarMenuButton
                       asChild
-                      isActive={pathname === "/dashboard" && openModule === module.slug}
+                      isActive={pathname === `/modules/${module.slug}`}
                       tooltip={module.name}
                     >
-                      <Link to="/dashboard" search={{ module: module.slug }}>
+                      <Link to="/modules/$slug" params={{ slug: module.slug }}>
                         <Icon />
                         <span>{module.name}</span>
                       </Link>

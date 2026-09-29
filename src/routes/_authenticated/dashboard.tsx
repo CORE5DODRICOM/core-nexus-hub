@@ -1,5 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Navigate } from "@tanstack/react-router";
 import { Activity, Boxes, Cable, HeartPulse, Users } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import { EnergyCore } from "@/components/core/EnergyCore";
 import { ModuleWorkspace } from "@/components/core/ModuleWorkspace";
 import { ConnectedModules } from "@/components/core/ConnectedModules";
@@ -34,11 +35,16 @@ export const Route = createFileRoute("/_authenticated/dashboard")({
 });
 
 function DashboardPage() {
+  const { isSuper, loading } = useAuth();
   const { module: openSlug } = Route.useSearch();
   const modules = useModules();
   const connections = useConnections();
   const users = useUsers();
   const logs = useActivityLogs(12);
+
+  if (!loading && !isSuper) {
+    return <Navigate to="/profile" replace />;
+  }
 
   const moduleRows = modules.data ?? [];
   const connectionRows = connections.data ?? [];
