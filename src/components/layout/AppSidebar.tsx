@@ -36,9 +36,6 @@ export function AppSidebar() {
   const { state } = useSidebar();
   const collapsed = state === "collapsed";
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const openModule = useRouterState({
-    select: (s) => (s.location.search as { module?: string })?.module,
-  });
   const { data: modules } = useModules();
   const activeModules = (modules ?? []).filter((m) => m.enabled);
 
