@@ -55,14 +55,16 @@ export function AppSidebar() {
         <SidebarGroup className="py-2">
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive={isActive("/dashboard")} tooltip="Dashboard">
-                  <Link to="/dashboard">
-                    <Gauge />
-                    <span>Dashboard</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {isSuper && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild isActive={isActive("/dashboard")} tooltip="Dashboard">
+                    <Link to="/dashboard">
+                      <Gauge />
+                      <span>Dashboard</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

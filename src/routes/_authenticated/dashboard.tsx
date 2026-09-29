@@ -42,6 +42,10 @@ function DashboardPage() {
   const users = useUsers();
   const logs = useActivityLogs(12);
 
+  if (!loading && !isSuper) {
+    return <Navigate to="/profile" replace />;
+  }
+
   const moduleRows = modules.data ?? [];
   const connectionRows = connections.data ?? [];
   const userRows = users.data ?? [];
