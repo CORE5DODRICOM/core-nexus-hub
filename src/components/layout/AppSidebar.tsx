@@ -138,17 +138,19 @@ export function AppSidebar() {
                   </SidebarMenuItem>
                 );
               })}
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Add New Module">
-                  <Link
-                    to="/parameters/modules"
-                    className="mt-1 bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
-                  >
-                    <Plus />
-                    <span>Add New Module</span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+              {isSuper && (
+                <SidebarMenuItem>
+                  <SidebarMenuButton asChild tooltip="Add New Module">
+                    <Link
+                      to="/parameters/modules"
+                      className="mt-1 bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+                    >
+                      <Plus />
+                      <span>Add New Module</span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
