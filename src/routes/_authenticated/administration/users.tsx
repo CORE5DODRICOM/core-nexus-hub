@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -34,7 +35,11 @@ export const Route = createFileRoute("/_authenticated/administration/users")({
       { property: "og:description", content: "Manage platform accounts and access." },
     ],
   }),
-  component: UsersPage,
+  component: () => (
+    <SuperAdminGate>
+      <UsersPage />
+    </SuperAdminGate>
+  ),
 });
 
 function UsersPage() {

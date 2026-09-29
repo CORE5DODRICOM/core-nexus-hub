@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -35,7 +36,11 @@ export const Route = createFileRoute("/_authenticated/parameters/modules")({
       { property: "og:description", content: "The Core module registry." },
     ],
   }),
-  component: ModulesManagementPage,
+  component: () => (
+    <SuperAdminGate>
+      <ModulesManagementPage />
+    </SuperAdminGate>
+  ),
 });
 
 const EMPTY = {

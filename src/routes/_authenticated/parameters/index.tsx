@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -20,7 +21,11 @@ export const Route = createFileRoute("/_authenticated/parameters/")({
       { property: "og:description", content: "Platform identity and maintenance settings." },
     ],
   }),
-  component: GeneralSettingsPage,
+  component: () => (
+    <SuperAdminGate>
+      <GeneralSettingsPage />
+    </SuperAdminGate>
+  ),
 });
 
 function valueOf(v: unknown) {

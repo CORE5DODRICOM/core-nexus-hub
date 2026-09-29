@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/common/PageHeader";
 import { StatusBadge } from "@/components/common/StatusBadge";
@@ -12,7 +13,11 @@ export const Route = createFileRoute("/_authenticated/parameters/system")({
       { property: "og:description", content: "Runtime configuration and health." },
     ],
   }),
-  component: SystemPage,
+  component: () => (
+    <SuperAdminGate>
+      <SystemPage />
+    </SuperAdminGate>
+  ),
 });
 
 function SystemPage() {
