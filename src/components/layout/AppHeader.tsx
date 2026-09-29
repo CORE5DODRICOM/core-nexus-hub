@@ -1,5 +1,5 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Bell, LogOut, Search, Settings, ShieldCheck, Sparkles, Sun, User as UserIcon, UserCog } from "lucide-react";
+import { Bell, LogOut, Moon, Search, Settings, ShieldCheck, Sparkles, Sun, User as UserIcon, UserCog } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Input } from "@/components/ui/input";
@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { displayName, useAuth } from "@/hooks/useAuth";
+import { useTheme } from "@/hooks/useTheme";
 
 const TITLES: Record<string, string> = {
   "/dashboard": "Dashboard",
@@ -33,6 +34,7 @@ export function AppHeader() {
   const { profile, roleName, user, signOut } = useAuth();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { theme, toggleTheme } = useTheme();
 
   const title = TITLES[pathname] ?? (pathname.startsWith("/modules/") ? "Modules" : "DODRI Core");
   const name = displayName(profile, user?.email);
@@ -71,7 +73,15 @@ export function AppHeader() {
           <Input placeholder="Search modules, users, settings..." className="h-8 w-56 rounded-md border-primary/15 bg-background/70 pl-9 text-xs lg:w-64" />
         </div>
 
-        <Button variant="ghost" size="icon" aria-label="Appearance" className="hidden h-8 w-8 sm:inline-flex"><Sun /></Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          aria-label={theme === "dark" ? "Passer en mode clair" : "Passer en mode sombre"}
+          onClick={toggleTheme}
+          className="h-8 w-8"
+        >
+          {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+        </Button>
 
         <Button variant="ghost" size="icon" aria-label="Notifications" className="relative h-8 w-8">
           <Bell className="h-4 w-4" />
