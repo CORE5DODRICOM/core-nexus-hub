@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { useEffect, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -39,7 +40,11 @@ export const Route = createFileRoute("/_authenticated/parameters/company")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: CompanyPage,
+  component: () => (
+    <SuperAdminGate>
+      <CompanyPage />
+    </SuperAdminGate>
+  ),
 });
 
 const PLANS: SubscriptionPlan[] = ["MONTHLY", "SEMI_ANNUAL", "ANNUAL"];

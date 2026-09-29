@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQueryClient } from "@tanstack/react-query";
@@ -33,7 +34,11 @@ export const Route = createFileRoute("/_authenticated/parameters/connections")({
       { property: "og:description", content: "Module to Core and module to module links." },
     ],
   }),
-  component: ConnectionsPage,
+  component: () => (
+    <SuperAdminGate>
+      <ConnectionsPage />
+    </SuperAdminGate>
+  ),
 });
 
 const PERMISSION_OPTIONS = ["core.read", "core.write", "data.read", "data.write", "events.subscribe"];

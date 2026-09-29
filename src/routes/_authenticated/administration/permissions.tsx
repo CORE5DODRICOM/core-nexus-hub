@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/common/PageHeader";
 import { usePermissions } from "@/hooks/useCore";
@@ -11,7 +12,11 @@ export const Route = createFileRoute("/_authenticated/administration/permissions
       { property: "og:description", content: "Granular permissions catalogue." },
     ],
   }),
-  component: PermissionsPage,
+  component: () => (
+    <SuperAdminGate>
+      <PermissionsPage />
+    </SuperAdminGate>
+  ),
 });
 
 function PermissionsPage() {

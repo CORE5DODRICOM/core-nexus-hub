@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/common/PageHeader";
 import { StatusBadge } from "@/components/common/StatusBadge";
@@ -11,7 +12,11 @@ export const Route = createFileRoute("/_authenticated/parameters/api")({
       { property: "og:description", content: "Integration surface of the Core." },
     ],
   }),
-  component: ApiPage,
+  component: () => (
+    <SuperAdminGate>
+      <ApiPage />
+    </SuperAdminGate>
+  ),
 });
 
 const SURFACES = [

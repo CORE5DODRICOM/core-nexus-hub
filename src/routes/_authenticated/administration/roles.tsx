@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck } from "lucide-react";
 import { PageHeader } from "@/components/common/PageHeader";
@@ -12,7 +13,11 @@ export const Route = createFileRoute("/_authenticated/administration/roles")({
       { property: "og:description", content: "Roles and granted permissions." },
     ],
   }),
-  component: RolesPage,
+  component: () => (
+    <SuperAdminGate>
+      <RolesPage />
+    </SuperAdminGate>
+  ),
 });
 
 function RolesPage() {

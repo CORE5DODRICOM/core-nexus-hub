@@ -1,3 +1,4 @@
+import { SuperAdminGate } from "@/components/layout/SuperAdminGate";
 import { createFileRoute } from "@tanstack/react-router";
 import { PageHeader } from "@/components/common/PageHeader";
 import { RecentActivity, type ActivityRow } from "@/components/core/RecentActivity";
@@ -12,7 +13,11 @@ export const Route = createFileRoute("/_authenticated/administration/activity-lo
       { property: "og:description", content: "Audit trail of Core events." },
     ],
   }),
-  component: ActivityLogsPage,
+  component: () => (
+    <SuperAdminGate>
+      <ActivityLogsPage />
+    </SuperAdminGate>
+  ),
 });
 
 function ActivityLogsPage() {
