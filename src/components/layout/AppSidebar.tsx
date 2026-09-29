@@ -130,10 +130,10 @@ export function AppSidebar() {
                   <SidebarMenuItem key={module.id}>
                     <SidebarMenuButton
                       asChild
-                      isActive={pathname === "/dashboard" && openModule === module.slug}
+                      isActive={pathname === `/modules/${module.slug}`}
                       tooltip={module.name}
                     >
-                      <Link to="/dashboard" search={{ module: module.slug }}>
+                      <Link to="/modules/$slug" params={{ slug: module.slug }}>
                         <Icon />
                         <span>{module.name}</span>
                       </Link>
