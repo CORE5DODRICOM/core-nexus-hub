@@ -23,7 +23,7 @@ export function EnergyCore({ modules, connections = [] }: Props) {
     );
 
   return (
-    <section className="core-stage panel relative flex min-h-[430px] flex-col overflow-hidden p-3">
+    <section className="core-stage panel relative flex min-h-[430px] flex-col overflow-hidden p-4">
       <div className="absolute left-3 top-3 z-10 section-title">Core Intelligence</div>
       <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5 text-[9px] font-semibold text-success">
         <span className="status-dot bg-success" /> LIVE

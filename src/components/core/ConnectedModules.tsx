@@ -5,7 +5,7 @@ import { moduleIcon } from "@/lib/dodri/icons";
 export function ConnectedModules({ modules, connections }: { modules: ModuleRow[]; connections: ConnectionRow[] }) {
   const enabled = modules.filter((module) => module.enabled);
   return (
-    <section className="panel p-3">
+    <section className="panel p-4">
       <div className="flex items-center justify-between border-b border-border/60 pb-2.5"><div className="section-title">Connected Modules</div><Cable className="h-3.5 w-3.5 text-primary" /></div>
       <div className="mt-2.5 space-y-1.5">
         {enabled.slice(0, 6).map((module) => {

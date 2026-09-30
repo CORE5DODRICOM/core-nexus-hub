@@ -85,7 +85,7 @@ function DashboardPage() {
   ];
 
   return (
-    <div className="mx-auto max-w-[1700px] space-y-2.5">
+    <div className="mx-auto max-w-[1700px] space-y-4">
       <MetricCards metrics={metrics} />
 
       {openModule ? (
@@ -104,7 +104,7 @@ function DashboardPage() {
         />
       )}
 
-      <div className="grid gap-2.5 xl:grid-cols-[230px_minmax(420px,1fr)_330px]">
+      <div className="grid gap-4 xl:grid-cols-[230px_minmax(420px,1fr)_330px]">
         <RegistryPanel modules={moduleRows} />
         <div className="grid min-w-0 gap-2.5 md:grid-cols-2">
           <RecentActivity rows={(logs.data ?? []) as ActivityRow[]} dense />

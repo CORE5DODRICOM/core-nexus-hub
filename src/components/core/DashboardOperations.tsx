@@ -18,7 +18,7 @@ import { moduleIcon } from "@/lib/dodri/icons";
 
 export function RegistryPanel({ modules }: { modules: ModuleRow[] }) {
   return (
-    <section className="panel flex min-h-[430px] flex-col overflow-hidden p-3 xl:min-h-0">
+    <section className="panel flex min-h-[430px] flex-col overflow-hidden p-4 xl:min-h-0">
       <div className="flex items-center justify-between border-b border-border/70 pb-3">
         <div>
           <div className="section-title">Module Registry</div>
@@ -95,7 +95,7 @@ export function CoreTelemetry({
 
   return (
     <aside className="flex min-h-0 flex-col gap-3">
-      <section className="panel overflow-hidden p-3">
+      <section className="panel overflow-hidden p-4">
         <div className="section-title border-b border-border/70 pb-3">Core Telemetry</div>
         <div className="mt-3 grid grid-cols-2 gap-2">
           <TelemetryCell label="Modules online" value={activeModules} />
@@ -105,7 +105,7 @@ export function CoreTelemetry({
         </div>
       </section>
 
-      <section className="panel flex flex-1 flex-col overflow-hidden p-3">
+      <section className="panel flex flex-1 flex-col overflow-hidden p-4">
         <div className="flex items-center justify-between border-b border-border/70 pb-3">
           <div className="section-title">System Stream</div>
           <Activity className="h-4 w-4 text-primary" />
@@ -146,7 +146,7 @@ export function SystemResources({ modules, connections }: { modules: ModuleRow[]
   const registryHealth = modules.length ? 100 : 0;
 
   return (
-    <section className="panel p-3">
+    <section className="panel p-4">
       <div className="section-title mb-3">System Resources</div>
       <div className="grid grid-cols-3 gap-3">
         <Resource label="Registry" value={registryHealth} />
@@ -180,7 +180,7 @@ export function QuickActions() {
   ];
 
   return (
-    <section className="panel p-3">
+    <section className="panel p-4">
       <div className="section-title mb-3">Quick Actions</div>
       <div className="grid grid-cols-2 gap-2">
         {actions.map((action) => (
