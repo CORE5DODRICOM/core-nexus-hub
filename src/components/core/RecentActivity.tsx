@@ -23,7 +23,7 @@ function iconFor(action: string) {
 
 export function RecentActivity({ rows, dense = false }: { rows: ActivityRow[]; dense?: boolean }) {
   return (
-    <section className="panel p-3">
+    <section className="panel p-4">
       <div className="section-title mb-2.5">Recent Activity</div>
       {rows.length === 0 && <p className="text-sm text-muted-foreground">No activity recorded yet.</p>}
       <ul className="divide-y divide-border/60">

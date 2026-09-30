@@ -4,15 +4,15 @@ export type Metric = { label: string; value: string | number; icon: LucideIcon; 
 
 export function MetricCards({ metrics }: { metrics: Metric[] }) {
   return (
-    <div className="grid grid-cols-2 gap-2 md:grid-cols-5">
+    <div className="grid grid-cols-2 gap-3 lg:grid-cols-5">
       {metrics.map((m) => (
-        <div key={m.label} className="panel animate-rise px-3 py-2.5">
+        <div key={m.label} className="metric-card animate-rise min-h-28 p-4">
           <div className="flex items-start justify-between">
             <div className="label-tech">{m.label}</div>
-            <m.icon className="h-4 w-4 text-primary" />
+            <span className="grid h-8 w-8 place-items-center rounded-md bg-primary/10 text-primary"><m.icon className="h-4 w-4" /></span>
           </div>
-          <div className="mt-1 font-display text-xl font-bold text-primary">{m.value}</div>
-          {m.hint && <div className="mt-0.5 text-[9px] text-muted-foreground">{m.hint}</div>}
+          <div className="mt-4 font-display text-2xl font-bold text-foreground">{m.value}</div>
+          <div className="mt-2 flex items-center gap-2"><span className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted"><span className="block h-full w-2/3 rounded-full bg-primary" /></span>{m.hint && <span className="text-[9px] text-muted-foreground">{m.hint}</span>}</div>
         </div>
       ))}
     </div>

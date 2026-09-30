@@ -4,7 +4,7 @@ export type ServiceStatus = { label: string; value: string; tone: StatusTone };
 
 export function CoreStatusPanel({ services }: { services: ServiceStatus[] }) {
   return (
-    <section className="panel p-4">
+    <section className="panel p-5">
       <div className="label-tech mb-3">Core Status</div>
       <ul className="space-y-2.5">
         {services.map((s) => (

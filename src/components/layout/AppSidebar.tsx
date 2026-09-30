@@ -43,13 +43,13 @@ export function AppSidebar() {
   const isActive = (path: string) => pathname === path;
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-sidebar-border bg-sidebar/90 shadow-[var(--shadow-soft)]">
-      <SidebarHeader className="border-b border-sidebar-border px-3 py-2.5">
+    <Sidebar collapsible="icon" variant="floating" className="border-0 bg-transparent p-0 shadow-none [&_[data-sidebar=sidebar]]:rounded-xl [&_[data-sidebar=sidebar]]:border [&_[data-sidebar=sidebar]]:border-sidebar-border [&_[data-sidebar=sidebar]]:bg-sidebar/95 [&_[data-sidebar=sidebar]]:shadow-[var(--shadow-panel)] [&_[data-sidebar=sidebar]]:backdrop-blur-xl">
+      <SidebarHeader className="border-b border-sidebar-border px-3 py-3">
         {collapsed ? <DodriMark className="mx-auto h-8 w-8" /> : <DodriLogo />}
       </SidebarHeader>
 
       <SidebarContent>
-        <SidebarGroup className="py-2">
+        <SidebarGroup className="py-3">
           <SidebarGroupContent>
             <SidebarMenu>
               {isSuper && (
@@ -143,7 +143,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild tooltip="Add New Module">
                     <Link
                       to="/parameters/modules"
-                      className="mt-1 bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground"
+                      className="mt-1 bg-primary/15 text-primary hover:bg-primary/25 hover:text-primary"
                     >
                       <Plus />
                       <span>Add New Module</span>
@@ -234,7 +234,7 @@ export function AppSidebar() {
 
       <SidebarFooter className="px-3 pb-3">
         {!collapsed && (
-          <div className="rounded-md border border-primary/15 bg-primary/5 px-3 py-2.5 text-center">
+          <div className="rounded-md border border-primary/20 bg-primary/10 px-3 py-2.5 text-center">
             <Settings2 className="mx-auto mb-1 h-4 w-4 text-primary" />
             <div className="font-display text-sm font-semibold text-gradient">DODRI CORE</div>
             <div className="label-tech mt-1">v1.0.0</div>
